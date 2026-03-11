@@ -13,6 +13,7 @@ import { defaultKeymap, history, historyKeymap } from "@codemirror/commands";
 import { obsidianTheme, obsidianHighlighting } from "./theme";
 import { livePreviewPlugin } from "./live-preview";
 import { markdownKeymap } from "./keybindings";
+import { imeSupport } from "./ime-support";
 
 export const livePreviewCompartment = new Compartment();
 
@@ -34,6 +35,7 @@ export function createEditorState(
     obsidianTheme,
     obsidianHighlighting,
     livePreviewCompartment.of(livePreview ? livePreviewPlugin : []),
+    imeSupport,
     EditorView.updateListener.of((update) => {
       if (update.docChanged) {
         const content = update.state.doc.toString();
