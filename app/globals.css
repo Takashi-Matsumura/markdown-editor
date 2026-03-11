@@ -473,6 +473,48 @@ body {
   font-size: 14px;
 }
 
+/* Shortcut Footer */
+.shortcut-footer {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 28px;
+  padding: 0 12px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  flex-shrink: 0;
+  overflow-x: auto;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+
+.shortcut-kbd {
+  font-family: "SF Mono", "Fira Code", monospace;
+  font-size: 11px;
+  color: var(--text-normal);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-radius: 3px;
+  padding: 0 4px;
+  line-height: 18px;
+}
+
+.shortcut-label {
+  font-size: 11px;
+  color: var(--text-faint);
+}
+
+@media (max-width: 768px) {
+  .shortcut-footer {
+    display: none;
+  }
+}
+
 /* Storage info in sidebar footer */
 .sidebar-footer {
   padding: 10px 16px;

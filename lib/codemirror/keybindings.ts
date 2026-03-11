@@ -53,6 +53,37 @@ function toggleWrap(marker: string) {
   };
 }
 
+function insertCodeBlock() {
+  return ({ state, dispatch }: { state: any; dispatch: any }) => {
+    const changes = state.changeByRange((range: any) => {
+      const text = state.sliceDoc(range.from, range.to);
+      const line = state.doc.lineAt(range.from);
+      const needsNewlineBefore = range.from > line.from ? "\n" : "";
+
+      if (text) {
+        const insert = `${needsNewlineBefore}\`\`\`\n${text}\n\`\`\`\n`;
+        const offset = needsNewlineBefore.length + 4; // ``` + \n
+        return {
+          changes: { from: range.from, to: range.to, insert },
+          range: EditorSelection.range(
+            range.from + offset,
+            range.from + offset + text.length
+          ),
+        };
+      }
+
+      const insert = `${needsNewlineBefore}\`\`\`\n\n\`\`\`\n`;
+      const cursorPos = range.from + needsNewlineBefore.length + 4;
+      return {
+        changes: { from: range.from, insert },
+        range: EditorSelection.cursor(cursorPos),
+      };
+    });
+    dispatch(state.update(changes, { userEvent: "input.format" }));
+    return true;
+  };
+}
+
 function insertLink() {
   return ({ state, dispatch }: { state: any; dispatch: any }) => {
     const changes = state.changeByRange((range: any) => {
@@ -83,4 +114,5 @@ export const markdownKeymap: KeyBinding[] = [
   { key: "Mod-i", run: toggleWrap("*") },
   { key: "Mod-e", run: toggleWrap("`") },
   { key: "Mod-k", run: insertLink() },
+  { key: "Mod-Shift-e", run: insertCodeBlock() },
 ];

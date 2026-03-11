@@ -8,7 +8,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "マークダウンエディタ",
+  title: "markdown-editor",
   description: "Obsidian風ライブプレビュー付きマークダウンエディタ",
 };
 
@@ -18,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" data-theme="dark" suppressHydrationWarning>
+    <html lang="ja" data-theme="light" suppressHydrationWarning>
       <body className={`${inter.variable}`}>{children}</body>
     </html>
   );

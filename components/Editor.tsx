@@ -5,6 +5,7 @@ import CodeMirrorEditor from "./CodeMirrorEditor";
 import MarkdownPreview from "./MarkdownPreview";
 import Toolbar from "./Toolbar";
 import Sidebar from "./Sidebar";
+import ShortcutFooter from "./ShortcutFooter";
 import {
   Document,
   SAMPLE_DOC_ID,
@@ -24,7 +25,7 @@ export default function Editor() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<ViewMode>("live");
-  const [theme, setTheme] = useState<Theme>("dark");
+  const [theme, setTheme] = useState<Theme>("light");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const saveTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -224,6 +225,7 @@ export default function Editor() {
           </div>
         )}
       </div>
+      <ShortcutFooter />
     </div>
   );
 }
